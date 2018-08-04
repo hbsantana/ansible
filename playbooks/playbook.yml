@@ -1,0 +1,39 @@
+---
+- name: Playbook de teste
+  hosts: all
+  tasks:
+    - name: Remove o servidor web Apache nas maquinas Ubuntu
+      apt:
+        name: apache2
+        state: absent
+      when: ansible_os_family == 'Debian'
+
+    - name: Instala o servidor web nginx nas maquinas Ubuntu
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Remove o servidor web Apache nas maquinas CentOS
+      yum:
+        name: httpd
+        state: absent
+      when: ansible_os_family == 'RedHat'
+    
+    - name: Instala o servidor web nginx nas maquinas CentOS
+      yum:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+
+#    - name: Copia o index
+#      copy:
+#        src: index.html
+#        dest: /var/www/html/
+
+#    - name: Reinicia o servidor web
+#      service:
+#        name: httpd
+#        state: restarted
+#      when: ansible_os_family == 'RedHat'

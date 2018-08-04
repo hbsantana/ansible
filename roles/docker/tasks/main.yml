@@ -1,0 +1,15 @@
+---
+# tasks file for docker
+- name: Instalacao do Docker no servidor
+  hosts: docker
+  tasks:
+    - name: Desinstalar versoes antigas do Docker
+      apt:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - docker
+        - docker-engine
+        - docker.io
+
+
